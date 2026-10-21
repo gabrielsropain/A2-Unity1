@@ -1,16 +1,34 @@
-using JetBrains.Annotations;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+
+public class Player : MonoBehaviour, IDamageable
 {
     public float speed = 5f;
     public float sensitivity = 2f;
     public Transform cam;
     float verticalRotation = 0f;
+    public bool hasWeapon = false;
 
     Rigidbody rb;
+    public void TakeDamage()
+    {
+        Debug.Log("Player Died");
+    }
 
+    void Shoot()
+    {
+        RaycastHit hit;
+
+        if (Physics.Raycast(cam.position, cam.transform.forward, out hit, 100f))
+        {
+            IDamageable target = hit.collider.GetComponent<IDamageable>();
+
+            if (target != null)
+            {
+                target.TakeDamage();
+            }
+        }
+    }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,5 +52,11 @@ public class Player : MonoBehaviour
         verticalRotation = Mathf.Clamp(verticalRotation, -80f, 80f);
         cam.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
         transform.Rotate(0, mouseX, 0);
+        if (hasWeapon && Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
+
     }
+    
 }
