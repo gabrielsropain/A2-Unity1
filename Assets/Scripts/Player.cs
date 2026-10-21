@@ -8,6 +8,7 @@ public class Player : MonoBehaviour, IDamageable
     public Transform cam;
     float verticalRotation = 0f;
     public bool hasWeapon = false;
+    public GameObject heldWeapon;
 
     Rigidbody rb;
     public void TakeDamage()
@@ -28,6 +29,12 @@ public class Player : MonoBehaviour, IDamageable
                 target.TakeDamage();
             }
         }
+    }
+
+    public void EquipWeapon()
+    {
+        hasWeapon = true;
+        heldWeapon.SetActive(true);
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
