@@ -20,4 +20,14 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         Destroy(gameObject);
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            IDamageable target = collision.gameObject.GetComponent<IDamageable>();
+            target.TakeDamage();
+        }
+    }
 }
