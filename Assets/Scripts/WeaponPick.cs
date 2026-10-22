@@ -9,7 +9,7 @@ public class WeaponPick : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Player player = other.GetComponent<Player>();
-            player.hasWeapon = true;
+            player.EquipWeapon();
             Destroy(gameObject);
         }
     }
