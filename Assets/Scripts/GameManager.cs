@@ -1,19 +1,17 @@
 using UnityEngine;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
     private int _enemiesRemaining;
+    public TextMeshProUGUI countText;
+    public TextMeshProUGUI resultText;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _enemiesRemaining = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;
+        UpdateCounter();
 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public void EnemyDied(){
@@ -22,13 +20,23 @@ public class GameManager : MonoBehaviour
         if (_enemiesRemaining == 0){
             PlayerWon();
         }
+        UpdateCounter();
     }
 
     public void PlayerDied(){
-        Debug.Log("Perdiste");
+        Debug.Log("You lost");
+        resultText.gameObject.SetActive(true);
+        resultText.text = "You lost";
     }
 
     public void PlayerWon(){
-        Debug.Log("Ganaste");
+        Debug.Log("You Won");
+        resultText.gameObject.SetActive(true);
+        resultText.text = "You Won";
+
+    }
+
+    public void UpdateCounter(){
+        countText.text = "Enemies: " + _enemiesRemaining;
     }
 }
