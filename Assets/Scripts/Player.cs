@@ -9,11 +9,12 @@ public class Player : MonoBehaviour, IDamageable
     float verticalRotation = 0f;
     public bool hasWeapon = false;
     public GameObject heldWeapon;
+    GameManager game;
 
     Rigidbody rb;
     public void TakeDamage()
     {
-        Debug.Log("Player Died");
+        game.PlayerDied();
     }
 
     void Shoot()
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         rb = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.Locked;
+        game = FindFirstObjectByType<GameManager>();
     }
 
     // Update is called once per frame
@@ -63,7 +65,6 @@ public class Player : MonoBehaviour, IDamageable
         {
             Shoot();
         }
-
     }
     
 }

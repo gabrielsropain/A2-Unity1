@@ -111,3 +111,5 @@ InitTestScene*.unity*
 # Visual Studio 
 .vs
 .vsconfig
+.vscode/
+.DS_Store
