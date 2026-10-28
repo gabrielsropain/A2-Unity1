@@ -6,11 +6,14 @@ public class GameManager : MonoBehaviour
     private int _enemiesRemaining;
     public TextMeshProUGUI countText;
     public TextMeshProUGUI resultText;
+    private bool _gameOver = false;
+    public bool isGameOver => _gameOver;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _enemiesRemaining = FindObjectsByType<Enemy>(FindObjectsSortMode.None).Length;
         UpdateCounter();
+        Time.timeScale = 1;
 
     }
 
@@ -24,16 +27,25 @@ public class GameManager : MonoBehaviour
     }
 
     public void PlayerDied(){
+        if (_gameOver == true){
+            return;
+        }
+        _gameOver = true;
         Debug.Log("You lost");
         resultText.gameObject.SetActive(true);
         resultText.text = "You lost";
+        Time.timeScale = 0;
     }
 
     public void PlayerWon(){
+         if (_gameOver == true){
+            return;
+        }
+        _gameOver = true;
         Debug.Log("You Won");
         resultText.gameObject.SetActive(true);
         resultText.text = "You Won";
-
+        Time.timeScale = 0;
     }
 
     public void UpdateCounter(){

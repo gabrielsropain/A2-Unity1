@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, IDamageable
         verticalRotation = Mathf.Clamp(verticalRotation, -80f, 80f);
         cam.localRotation = Quaternion.Euler(verticalRotation, 0, 0);
         transform.Rotate(0, mouseX, 0);
-        if (hasWeapon && Input.GetMouseButtonDown(0))
+        if (hasWeapon && Input.GetMouseButtonDown(0) && game.isGameOver != true)
         {
             Shoot();
         }
