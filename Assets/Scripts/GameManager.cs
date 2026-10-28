@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
         resultText.gameObject.SetActive(true);
         resultText.text = "You lost";
         Time.timeScale = 0;
+        CursorState();
     }
 
     public void PlayerWon(){
@@ -46,9 +47,15 @@ public class GameManager : MonoBehaviour
         resultText.gameObject.SetActive(true);
         resultText.text = "You Won";
         Time.timeScale = 0;
+        CursorState();
     }
 
     public void UpdateCounter(){
         countText.text = "Enemies: " + _enemiesRemaining;
+    }
+
+    public void CursorState(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
